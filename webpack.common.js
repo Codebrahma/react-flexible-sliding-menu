@@ -1,4 +1,4 @@
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -19,6 +19,6 @@ module.exports = {
   },
   externals: {
     // Use external version of React
-    react: 'react',
+    react: 'react'
   }
 };

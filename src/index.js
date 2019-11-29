@@ -1,1 +1,3 @@
-export { default as Fancy } from './Fancy';
+import Fancy from './Fancy';
+
+export default Fancy;
