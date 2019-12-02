@@ -18,6 +18,7 @@
   "plugins": ["react", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "func-names": "off"
+    "func-names": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
