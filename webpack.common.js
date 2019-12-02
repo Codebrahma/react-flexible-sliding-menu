@@ -7,10 +7,11 @@ module.exports = {
     filename: 'index.js',
     libraryTarget: 'umd'
   },
+  resolve: { extensions: ['.js', '.jsx'] },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         include: path.resolve(__dirname, 'src'),
         exclude: /(node_modules|bower_components|build)/,
         use: ['babel-loader']
