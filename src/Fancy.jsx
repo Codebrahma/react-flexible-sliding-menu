@@ -6,7 +6,7 @@ export const FancyContext = createContext();
 const Fancy = props => {
   const { defaultState, MenuComponent, children, width, direction } = props;
   const [isMenuOpen, setIsMenuOpen] = useState(defaultState || false);
-  const [menuProps, setMenuProps] = useState({});
+  const [menuProps, _setMenuProps] = useState({});
 
   const transitions = useTransition(isMenuOpen, null, {
     from: {
@@ -32,14 +32,14 @@ const Fancy = props => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const memSetMenuProps = newMenuProps => {
+  const setMenuProps = newMenuProps => {
     if (JSON.stringify(menuProps) !== JSON.stringify(newMenuProps))
-      setMenuProps(newMenuProps);
+      _setMenuProps(newMenuProps);
   };
 
   return (
     <FancyContext.Provider
-      value={{ openMenu, closeMenu, toggleMenu, memSetMenuProps }}
+      value={{ openMenu, closeMenu, toggleMenu, setMenuProps }}
     >
       {transitions.map(
         ({ item, key, props: springProps }) =>
