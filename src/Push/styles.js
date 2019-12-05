@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from 'styled-components';
 
-const SlideIn = direction => {
+const PushIn = direction => {
   return keyframes`
     from {
         transform: translateX(${direction === 'right' ? '+' : '-'}100%);
@@ -11,7 +11,7 @@ const SlideIn = direction => {
     `;
 };
 
-const SlideOut = direction => {
+const PushOut = direction => {
   return keyframes`
     from {
         transform: 'translateX(0)'
@@ -22,7 +22,7 @@ const SlideOut = direction => {
     `;
 };
 
-const SlidingDiv = styled.div`
+export const PushingDiv = styled.div`
   position: fixed;
   width: ${props => props.width};
   z-index: 9999999999;
@@ -34,10 +34,16 @@ const SlidingDiv = styled.div`
   animation: ${props => {
     return css`
       ${props.show
-        ? SlideIn(props.direction)
-        : SlideOut(props.direction)} .3s ease;
+        ? PushIn(props.direction)
+        : PushOut(props.direction)} 0.3s ease;
     `;
   }};
 `;
 
-export default SlidingDiv;
+export const PushingApp = styled.div`
+  transition: transform 0.3s ease;
+  transform: ${props =>
+    props.push
+      ? `translateX(${(props.direction === 'right' ? '-' : '+') + props.width})`
+      : 'translateX(0)'};
+`;

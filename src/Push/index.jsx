@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import SlidingDiv from './styles';
+import { PushingDiv } from './styles';
 
-const Slide = ({ show, children, direction, width }) => {
+const Push = ({ show, children, direction, width }) => {
   const [shouldRender, setRender] = useState(show);
 
   useEffect(() => {
@@ -14,16 +14,16 @@ const Slide = ({ show, children, direction, width }) => {
 
   return (
     shouldRender && (
-      <SlidingDiv
+      <PushingDiv
         show={show}
         width={width}
         direction={direction}
         onAnimationEnd={onAnimationEnd}
       >
         {children}
-      </SlidingDiv>
+      </PushingDiv>
     )
   );
 };
 
-export default Slide;
+export default Push;
