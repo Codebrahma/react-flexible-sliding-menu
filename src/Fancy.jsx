@@ -71,7 +71,7 @@ Fancy.propTypes = {
     const validCSSDimension = /^(\d+|\d*\.\d+)(px|rem|em|%|vw|vh|cm|mm|Q|in|pc|pt|ex|ch|lh|vmin|vmax)$/;
     if (!validCSSDimension.test(width)) {
       return new Error(
-        `Invalid prop \`${propName}\` of value \`${width}\` supplied to \`${componentName}\`, expected a valid css width with dimension(px, em, rem, %, vw, etc.)`
+        `Invalid prop \`${propName}\` of value \`${width}\` supplied to \`${componentName}\`, expected a valid css length with unit (https://developer.mozilla.org/en-US/docs/Web/CSS/length).`
       );
     }
     return null;
