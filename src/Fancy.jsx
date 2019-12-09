@@ -1,4 +1,5 @@
 import React, { useState, createContext } from 'react';
+import PropTypes from 'prop-types';
 import SlidingDiv from './Slide';
 import PushingDiv from './Push';
 import { PushingApp } from './Push/styles';
@@ -10,9 +11,9 @@ const Fancy = props => {
     defaultState,
     MenuComponent,
     children,
-    width = '250px',
-    direction = 'left',
-    animation = 'slide'
+    width,
+    direction,
+    animation
   } = props;
   const [isMenuOpen, setIsMenuOpen] = useState(defaultState || false);
   const [menuProps, _setMenuProps] = useState({});
@@ -38,14 +39,7 @@ const Fancy = props => {
     <FancyContext.Provider
       value={{ openMenu, closeMenu, toggleMenu, setMenuProps }}
     >
-      {animation === 'slide' ? (
-        <>
-          <SlidingDiv show={isMenuOpen} direction={direction} width={width}>
-            <MenuComponent {...menuProps} />
-          </SlidingDiv>
-          {children}
-        </>
-      ) : (
+      {animation === 'push' ? (
         <>
           <PushingDiv show={isMenuOpen} direction={direction} width={width}>
             <MenuComponent {...menuProps} />
@@ -54,9 +48,41 @@ const Fancy = props => {
             {children}
           </PushingApp>
         </>
+      ) : (
+        <>
+          <SlidingDiv show={isMenuOpen} direction={direction} width={width}>
+            <MenuComponent {...menuProps} />
+          </SlidingDiv>
+          {children}
+        </>
       )}
     </FancyContext.Provider>
   );
+};
+
+Fancy.propTypes = {
+  defaultState: PropTypes.bool,
+  direction: PropTypes.oneOf(['left', 'right']),
+  animation: PropTypes.oneOf(['slide', 'push']),
+  MenuComponent: PropTypes.elementType.isRequired,
+  children: PropTypes.node.isRequired,
+  width: (props, propName, componentName) => {
+    const { width } = props;
+    const validCSSDimension = /^(\d+|\d*\.\d+)(px|rem|em|%|vw|vh|cm|mm|Q|in|pc|pt|ex|ch|lh|vmin|vmax)$/;
+    if (!validCSSDimension.test(width)) {
+      return new Error(
+        `Invalid prop \`${propName}\` of value \`${width}\` supplied to \`${componentName}\`, expected a valid css width with dimension(px, em, rem, %, vw, etc.)`
+      );
+    }
+    return null;
+  }
+};
+
+Fancy.defaultProps = {
+  defaultState: false,
+  width: '250px',
+  direction: 'left',
+  animation: 'slide'
 };
 
 export default Fancy;
