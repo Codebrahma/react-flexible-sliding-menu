@@ -1,0 +1,72 @@
+---
+name: Getting Started
+route: /getting-started
+---
+
+# Getting Started
+
+## Installation
+
+Start by installing `react-flexible-sliding-menu` as a dependency with `npm` :
+
+```
+npm i react-flexible-sliding-menu
+```
+
+or if you are using `yarn` :
+
+```
+yarn add flexible-sliding-menu
+```
+
+## Basic Usage
+
+### 1. Wrap with Menuprovider
+
+Wrap your `<App/>` with the `<Menuprovider/>`, and pass in the `MenuComponent`.
+
+```
+import MenuProvider from 'react-flexible-sliding-menu';
+import YourMenuComponent from 'path/to/your/MenuComponent';
+
+<MenuProvider MenuComponent={YourMenuComponent}>
+    <App/>
+</MenuProvider>
+```
+
+### 2. Open the Menu using Context
+
+Now, from anywhere within your `<App/>` useContext and open the menu.
+
+```
+import React, { useContext } from 'react';
+import { MenuContext } from 'react-flexible-sliding-menu';
+
+const App = () => {
+    const { toggleMenu } = useContext(MenuContext);
+    return (
+        <div>
+            <h1>Your App</h1>
+            <button onClick={toggleMenu} >
+                Toggle Menu
+            </button>
+        </div>
+    )
+}
+
+```
+
+## Example
+
+<!-- TODO: Replace this with Codesandbox demo -->
+
+import { Playground, Props } from 'docz';
+import MenuProvider from '../src';
+import App from './components/App';
+import Menu from './components/Menu';
+
+<Playground>
+  <MenuProvider MenuComponent={Menu} direction="right">
+    <App />
+  </MenuProvider>
+</Playground>
