@@ -61,7 +61,11 @@ const MenuProvider = props => {
 };
 
 MenuProvider.propTypes = {
+  /**
+   * Set's the initial state of the Menu i.e. Open or Close
+   */
   defaultState: PropTypes.bool,
+  takeChildrenHeight: PropTypes.bool,
   direction: PropTypes.oneOf(['left', 'right']),
   animation: PropTypes.oneOf(['slide', 'push']),
   MenuComponent: PropTypes.elementType.isRequired,
@@ -80,6 +84,7 @@ MenuProvider.propTypes = {
 
 MenuProvider.defaultProps = {
   defaultState: false,
+  takeChildrenHeight: false,
   width: '250px',
   direction: 'left',
   animation: 'slide'
