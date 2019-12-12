@@ -1,3 +1,8 @@
 export default {
-  dest: './dist-docs'
+  dest: './dist-docs',
+  menu: [
+    'Introduction',
+    'Getting Started',
+    { name: 'API', menu: ['MenuProvider', 'openMenu'] }
+  ]
 };
