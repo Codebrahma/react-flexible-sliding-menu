@@ -1,4 +1,4 @@
-import Fancy from './Fancy';
+import MenuProvider, { MenuContext } from './Fancy';
 
-export default Fancy;
-export { FancyContext } from './Fancy';
+export default MenuProvider;
+export { MenuContext };

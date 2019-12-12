@@ -4,9 +4,9 @@ import SlidingDiv from './Slide';
 import PushingDiv from './Push';
 import { PushingApp } from './Push/styles';
 
-export const FancyContext = createContext();
+export const MenuContext = createContext();
 
-const Fancy = props => {
+const MenuProvider = props => {
   const {
     defaultState,
     MenuComponent,
@@ -36,7 +36,7 @@ const Fancy = props => {
   };
 
   return (
-    <FancyContext.Provider
+    <MenuContext.Provider
       value={{ openMenu, closeMenu, toggleMenu, setMenuProps }}
     >
       {animation === 'push' ? (
@@ -56,11 +56,11 @@ const Fancy = props => {
           {children}
         </>
       )}
-    </FancyContext.Provider>
+    </MenuContext.Provider>
   );
 };
 
-Fancy.propTypes = {
+MenuProvider.propTypes = {
   defaultState: PropTypes.bool,
   direction: PropTypes.oneOf(['left', 'right']),
   animation: PropTypes.oneOf(['slide', 'push']),
@@ -78,11 +78,11 @@ Fancy.propTypes = {
   }
 };
 
-Fancy.defaultProps = {
+MenuProvider.defaultProps = {
   defaultState: false,
   width: '250px',
   direction: 'left',
   animation: 'slide'
 };
 
-export default Fancy;
+export default MenuProvider;
