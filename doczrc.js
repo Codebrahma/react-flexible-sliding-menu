@@ -1,4 +1,5 @@
 export default {
+  files: 'docs/*',
   dest: './dist-docs',
   menu: [
     'Introduction',
