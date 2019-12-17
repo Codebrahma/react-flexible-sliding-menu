@@ -46,7 +46,7 @@ const App = () => {
     const { toggleMenu } = useContext(MenuContext);
     return (
         <div>
-            <h1>Your App</h1>
+            <h1>App</h1>
             <button onClick={toggleMenu} >
                 Toggle Menu
             </button>
@@ -56,17 +56,14 @@ const App = () => {
 
 ```
 
-## Example
+## Demo
 
-<!-- TODO: Replace this with Codesandbox demo -->
+After adding some additional content and styles we will get:
 
-import { Playground, Props } from 'docz';
-import MenuProvider from '../src';
-import App from './components/App';
-import Menu from './components/Menu';
-
-<Playground>
-  <MenuProvider MenuComponent={Menu} direction="right">
-    <App />
-  </MenuProvider>
-</Playground>
+<iframe
+  src="https://codesandbox.io/embed/react-flexible-sliding-menu-getting-starting-app-kchph?fontsize=14&hidenavigation=1&theme=dark"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="react-flexible-sliding-menu getting-starting-app"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>
