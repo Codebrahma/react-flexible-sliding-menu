@@ -1,10 +1,11 @@
 export default {
-  files: 'docs/*',
+  files: 'docs/**/*.{md,mdx}',
   dest: './dist-docs',
   menu: [
     'Introduction',
     'Getting Started',
-    { name: 'Examples', menu: ['Basic'] },
-    { name: 'API', menu: ['MenuProvider', 'openMenu'] }
+    { name: 'Animations', menu: ['Slide', 'Push'] },
+    { name: 'API', menu: ['MenuProvider', 'openMenu'] },
+    { name: 'Examples', menu: ['Usage with React Router'] }
   ]
 };
