@@ -1,6 +1,6 @@
 {
   "name": "react-flexible-sliding-menu",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,14 @@
     "docz:serve": "docz:build && docz serve"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Divyansh Batham",
+    "email": "divyansh.sunita@gmail.com",
+    "url": "https://github.com/DivyanshBatham"
+  },
+  "files": [
+    "dist/"
+  ],
   "license": "ISC",
   "peerDependencies": {
     "react": "^16.12.0"
