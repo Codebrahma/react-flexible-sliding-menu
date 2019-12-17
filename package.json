@@ -1,6 +1,6 @@
 {
   "name": "react-flexible-sliding-menu",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A React library which provides Flexible Sliding Menu with an easy to use API and a bunch of other awesome features. Also, you get to choose which animation you want for the sliding menu.",
   "main": "dist/index.js",
   "homepage": "https://react-flexible-sliding-menu.netlify.com/",
@@ -36,7 +36,9 @@
     "javascript",
     "sliding",
     "slider",
-    "animated"
+    "animated",
+    "sliding navbar",
+    "navbar slider"
   ],
   "author": {
     "name": "Divyansh Batham",
