@@ -6,7 +6,21 @@ route: /animations/push
 
 # Push Animation
 
-Menu Component partially pushes the App outside the viewport.
+Menu Component pushes the App outside the viewport.
+
+## Note
+
+You need to add `overflow: hidden` to the root of your app, otherwise you will get a horizontal scroll when the `Menu` is open.
+
+For `create-react-app` you can do:
+
+```
+#root {
+  overflow: hidden;
+}
+```
+
+## Example
 
 <iframe
   src="https://codesandbox.io/embed/animation-push-e3p3g?fontsize=14&hidenavigation=1&theme=dark"
