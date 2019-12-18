@@ -1,0 +1,108 @@
+---
+name: MenuContext
+menu: API
+route: /API/MenuContext
+---
+
+# MenuContext
+
+`MenuProvider` is a React's `Context.Provider` for our library, which allows us to share methods like `openMenu`, `closeMenu`, etc. and consume it from anywhere within `App` without having to explicitly pass a prop through every level of the tree.
+
+## Import
+
+`MenuContext` is a named export coming from `react-flexible-sliding-menu`.
+
+```
+import { MenuContext } from 'react-flexible-sliding-menu';
+```
+
+## Usage
+
+### Usage inside Functional Component
+
+```
+import React, { useContext } from 'react';
+import { MenuContext } from 'react-flexible-sliding-menu';
+
+const App = () => {
+    const { method1, method2, ... } = useContext(MenuContext);
+    return (
+        <button onClick={method1}>
+            Button Text
+        </button>
+        ...
+    )
+}
+```
+
+### Usage inside Class Component
+
+#### Have Multiple Contexts?
+
+If you are consuming multiple context inside a Class Component, make sure you have read [this](https://reactjs.org/docs/context.html#consuming-multiple-contexts).
+
+#### 1. Using `Class.contextType`
+
+> The contextType property on a class can be assigned a Context object created by React.createContext(). This lets you consume the nearest current value of that Context type using this.context. You can reference this in any of the lifecycle methods including the render function. [(Read More)](https://reactjs.org/docs/context.html#classcontexttype)
+
+<!-- [![Edit Using Class.contextType](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/using-classcontexttype-nfiky?fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.js&theme=dark) -->
+
+```
+import React, { Component } from 'react';
+import { MenuContext } from 'react-flexible-sliding-menu';
+
+class App extends Component {
+  static contextType = MenuContext;
+  render() {
+    const { method1, method2, ... } = this.context;
+    return (
+        <button onClick={method1}>
+            Button Text
+        </button>
+        ...
+    )
+  }
+}
+```
+
+#### 2. Using `Context.Consumer`
+
+> A React component that subscribes to context changes. This lets you subscribe to a context within a function component. [(Read More)](https://reactjs.org/docs/context.html#contextconsumer)
+
+```
+import React, { Component } from 'react';
+import { MenuContext } from 'react-flexible-sliding-menu';
+
+class App extends Component {
+  render() {
+    return (
+        <MenuContext.Consumer>
+        {({method1, method2, ...}) => (
+            <button onClick={method1}>
+                Button Text
+            </button>
+        )}
+        </MenuContext.Consumer>
+        ...
+    )
+  }
+}
+```
+
+## Methods
+
+### openMenu()
+
+Shows the `MenuComponent`.
+
+### closeMenu()
+
+Closes/Remove the `MenuComponent`.
+
+### toggleMenu()
+
+Toggles between show/remove of `MenuComponent`.
+
+### setMenuProps(props)
+
+Sends props to the `MenuComponent`.

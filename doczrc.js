@@ -5,7 +5,7 @@ export default {
     'Introduction',
     'Getting Started',
     { name: 'Animations', menu: ['Slide', 'Push'] },
-    { name: 'API', menu: ['MenuProvider', 'openMenu'] },
+    { name: 'API', menu: ['MenuProvider', 'MenuContext'] },
     { name: 'Examples', menu: ['Usage with React Router'] }
   ]
 };
