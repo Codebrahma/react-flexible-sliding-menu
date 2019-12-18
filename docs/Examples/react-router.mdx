@@ -6,18 +6,30 @@ route: /example/react-router
 
 # Usage with React Router
 
-All you need to make sure is that `<MenuProvider/>` is present inside the `<BrowserRouter/>`.
+[React Router](https://reacttraining.com/react-router/web/guides/quick-start) is routing library for React, which currently is the most popular routing library with 38.6K stars on [GitHub](https://github.com/ReactTraining/react-router). We assume that you are already familier with React Router, if you are not here's a link to their [quick-start](https://reacttraining.com/react-router/web/guides/quick-start) guide.
+
+For integrating your `MenuComponent` with React Router all you need to make sure is that `<MenuProvider/>` is present inside the `<BrowserRouter/>` and you can start using `<NavLink>` or `<Link>` inside your `MenuComponent`.
 
 ```
-<BrowserRouter>
-  <MenuProvider>
-    <App />
-  </MenuProvider>
-</BrowserRouter>
+import React from "react";
+import ReactDOM from "react-dom";
+import MenuProvider from 'react-flexible-sliding-menu';
+import { BrowserRouter } from 'react-router-dom';
+import App from "./App";
+import Menu from "./Menu";
+
+ReactDOM.render(
+  <BrowserRouter>
+    <MenuProvider MenuComponent={Menu} animation="push">
+      <App />
+    </MenuProvider>
+  </BrowserRouter>,
+  document.getElementById("root")
+);
 ```
 
 <iframe
-  src="https://codesandbox.io/embed/examples-react-router-r4q1p?fontsize=14&hidenavigation=1&theme=dark"
+  src="https://codesandbox.io/embed/examples-react-router-r4q1p?fontsize=14&theme=dark"
   style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
   title="examples-react-router"
   allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
