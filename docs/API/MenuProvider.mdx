@@ -6,6 +6,24 @@ route: /API/MenuProvider
 
 # MenuProvider
 
+`MenuProvider` is a React's `Context.Provider` for our library, which allows us to share methods like `openMenu`, `closeMenu`, etc. and consume it from anywhere within `App` without having to explicitly pass a prop through every level of the tree.
+
+## Import
+
+`MenuProvider` is exported as default from `react-flexible-sliding-menu`.
+
+```
+import MenuProvider from 'react-flexible-sliding-menu';
+```
+
+## Usage
+
+```
+<MenuProvider propName={propValue}>
+  <App />
+</MenuProvider>
+```
+
 ## Props
 
 import { Props } from 'docz';
