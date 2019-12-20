@@ -85,8 +85,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,json}": [
-      "eslint --fix",
+    "*.{js,jsx}": [
+      "eslint --fix -c ./.eslintrc.json",
+      "git add"
+    ],
+    "*.json": [
+      "eslint --fix --ext .json -c ./.eslintrc.json",
       "git add"
     ]
   }
