@@ -45,7 +45,7 @@
     "email": "divyansh.sunita@gmail.com",
     "url": "https://github.com/DivyanshBatham"
   },
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "react": "^16.12.0"
   },
