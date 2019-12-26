@@ -91,6 +91,11 @@
     ],
     "*.json": [
       "eslint --fix --ext .json -c ./.eslintrc.json",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{md,mdx}": [
+      "prettier --write",
       "git add"
     ]
   }
