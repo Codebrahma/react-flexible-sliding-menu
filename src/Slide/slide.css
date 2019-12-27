@@ -1,0 +1,55 @@
+/*     |-->     |     */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: 'translateX(0)';
+  }
+}
+
+.slideInFrom-left {
+  animation: slideInFromLeft 0.3s ease;
+}
+
+/*  <--|        |     */
+@keyframes slideOutFromLeft {
+  from {
+    transform: 'translateX(0)';
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.slideOutFrom-left {
+  animation: slideOutFromLeft 0.3s ease;
+}
+
+/*     |     <--|     */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(+100%);
+  }
+  to {
+    transform: 'translateX(0)';
+  }
+}
+
+.slideInFrom-right {
+  animation: slideInFromRight 0.3s ease;
+}
+
+/*     |        |-->  */
+@keyframes slideOutFromRight {
+  from {
+    transform: 'translateX(0)';
+  }
+  to {
+    transform: translateX(+100%);
+  }
+}
+
+.slideOutFrom-right {
+  animation: slideOutFromRight 0.3s ease;
+}

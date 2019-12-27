@@ -16,6 +16,20 @@ module.exports = {
         include: path.resolve(__dirname, 'src'),
         exclude: /(node_modules|bower_components|build)/,
         use: ['babel-loader']
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+          // {
+          //   loader: 'css-loader',
+          //   options: {
+          //     importLoaders: 1,
+          //     modules: true
+          //   }
+          // }
+        ]
       }
     ]
   },
