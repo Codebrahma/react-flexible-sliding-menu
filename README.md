@@ -1,4 +1,4 @@
-![Logo](./docs/svgs/Logo.svg)
+![Logo](./docs/public/Logo.svg)
 
 [![NPM Version Badge](https://img.shields.io/npm/v/react-flexible-sliding-menu)](https://www.npmjs.com/package/react-flexible-sliding-menu)
 [![NPM Downloads Badge](https://img.shields.io/npm/dm/react-flexible-sliding-menu)](https://www.npmjs.com/package/react-flexible-sliding-menu)
