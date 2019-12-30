@@ -41,47 +41,56 @@ const MenuProvider = props => {
       _setMenuProps(newMenuProps);
   };
 
+  const renderContents = () => {
+    switch (animation) {
+      case 'push':
+        return (
+          <>
+            {isMenuOpen && (
+              <MenuContainerForPush
+                direction={direction}
+                width={width}
+                menuIsClosing={menuIsClosing}
+                setIsMenuOpen={setIsMenuOpen}
+              >
+                <MenuComponent {...menuProps} />
+              </MenuContainerForPush>
+            )}
+            <AppContainerForPush
+              direction={direction}
+              width={width}
+              setIsMenuOpen={setIsMenuOpen}
+              isMenuOpen={isMenuOpen}
+              menuIsClosing={menuIsClosing}
+            >
+              {children}
+            </AppContainerForPush>
+          </>
+        );
+      default:
+        return (
+          <>
+            {isMenuOpen && (
+              <MenuContainerForSlide
+                direction={direction}
+                width={width}
+                menuIsClosing={menuIsClosing}
+                setIsMenuOpen={setIsMenuOpen}
+              >
+                <MenuComponent {...menuProps} />
+              </MenuContainerForSlide>
+            )}
+            {children}
+          </>
+        );
+    }
+  };
+
   return (
     <MenuContext.Provider
       value={{ openMenu, closeMenu, toggleMenu, setMenuProps }}
     >
-      {animation === 'push' ? (
-        <>
-          {isMenuOpen && (
-            <MenuContainerForPush
-              direction={direction}
-              width={width}
-              menuIsClosing={menuIsClosing}
-              setIsMenuOpen={setIsMenuOpen}
-            >
-              <MenuComponent {...menuProps} />
-            </MenuContainerForPush>
-          )}
-          <AppContainerForPush
-            direction={direction}
-            width={width}
-            setIsMenuOpen={setIsMenuOpen}
-            isMenuOpen={isMenuOpen}
-            menuIsClosing={menuIsClosing}
-          >
-            {children}
-          </AppContainerForPush>
-        </>
-      ) : (
-        <>
-          {isMenuOpen && (
-            <MenuContainerForSlide
-              direction={direction}
-              width={width}
-              menuIsClosing={menuIsClosing}
-              setIsMenuOpen={setIsMenuOpen}
-            >
-              <MenuComponent {...menuProps} />
-            </MenuContainerForSlide>
-          )}
-          {children}
-        </>
-      )}
+      {renderContents()}
     </MenuContext.Provider>
   );
 };
@@ -91,7 +100,6 @@ MenuProvider.propTypes = {
    * Set's the initial state of the Menu i.e. Open or Close
    */
   openByDefault: PropTypes.bool,
-  takeChildrenHeight: PropTypes.bool,
   direction: PropTypes.oneOf(['left', 'right']),
   animation: PropTypes.oneOf(['slide', 'push']),
   MenuComponent: PropTypes.elementType.isRequired,
@@ -101,7 +109,6 @@ MenuProvider.propTypes = {
 
 MenuProvider.defaultProps = {
   openByDefault: false,
-  takeChildrenHeight: false,
   width: '250px',
   direction: 'left',
   animation: 'slide'
