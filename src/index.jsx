@@ -8,14 +8,14 @@ export const MenuContext = createContext();
 
 const MenuProvider = props => {
   const {
-    defaultState,
+    openByDefault,
     MenuComponent,
     children,
     width,
     direction,
     animation
   } = props;
-  const [isMenuOpen, setIsMenuOpen] = useState(defaultState || false);
+  const [isMenuOpen, setIsMenuOpen] = useState(openByDefault || false);
   const [menuIsClosing, setMenuIsClosing] = useState(true);
   const [menuProps, _setMenuProps] = useState({});
 
@@ -90,7 +90,7 @@ MenuProvider.propTypes = {
   /**
    * Set's the initial state of the Menu i.e. Open or Close
    */
-  defaultState: PropTypes.bool,
+  openByDefault: PropTypes.bool,
   takeChildrenHeight: PropTypes.bool,
   direction: PropTypes.oneOf(['left', 'right']),
   animation: PropTypes.oneOf(['slide', 'push']),
@@ -100,7 +100,7 @@ MenuProvider.propTypes = {
 };
 
 MenuProvider.defaultProps = {
-  defaultState: false,
+  openByDefault: false,
   takeChildrenHeight: false,
   width: '250px',
   direction: 'left',
