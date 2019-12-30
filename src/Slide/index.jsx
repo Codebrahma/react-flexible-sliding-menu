@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import widthPropType from '../CustomProps/width';
-import './slide.css';
+import styles from './slide.module.css';
 
 const Slide = ({
   direction,
@@ -13,7 +12,7 @@ const Slide = ({
 }) => {
   const [menuIsOpening, setMenuIsOpening] = useState(false);
 
-  const styles = {
+  const baseStyles = {
     position: 'fixed',
     width,
     zIndex: 9999999999,
@@ -42,10 +41,8 @@ const Slide = ({
 
   return (
     <div
-      style={styles}
-      className={classNames({
-        slideMenuInsideViewport: menuIsOpening
-      })}
+      style={baseStyles}
+      className={menuIsOpening ? styles.slideMenuInsideViewport : null}
       onTransitionEnd={onTansitionEnd}
     >
       {children}
