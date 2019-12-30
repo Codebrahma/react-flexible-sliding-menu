@@ -1,5 +1,6 @@
 import React, { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
+import widthPropType from './CustomProps/width';
 import SlidingDiv from './Slide';
 import PushingDiv from './Push';
 import { PushingApp } from './Push/styles';
@@ -16,18 +17,24 @@ const MenuProvider = props => {
     animation
   } = props;
   const [isMenuOpen, setIsMenuOpen] = useState(defaultState || false);
+  const [menuIsClosing, setMenuIsClosing] = useState(false);
   const [menuProps, _setMenuProps] = useState({});
 
   const openMenu = () => {
     setIsMenuOpen(true);
+    setMenuIsClosing(false);
   };
 
   const closeMenu = () => {
-    setIsMenuOpen(false);
+    setMenuIsClosing(true);
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if (isMenuOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   };
 
   const setMenuProps = newMenuProps => {
@@ -50,9 +57,16 @@ const MenuProvider = props => {
         </>
       ) : (
         <>
-          <SlidingDiv show={isMenuOpen} direction={direction} width={width}>
-            <MenuComponent {...menuProps} />
-          </SlidingDiv>
+          {isMenuOpen && (
+            <SlidingDiv
+              direction={direction}
+              width={width}
+              menuIsClosing={menuIsClosing}
+              setIsMenuOpen={setIsMenuOpen}
+            >
+              <MenuComponent {...menuProps} />
+            </SlidingDiv>
+          )}
           {children}
         </>
       )}
@@ -70,16 +84,7 @@ MenuProvider.propTypes = {
   animation: PropTypes.oneOf(['slide', 'push']),
   MenuComponent: PropTypes.elementType.isRequired,
   children: PropTypes.node.isRequired,
-  width: (props, propName, componentName) => {
-    const { width } = props;
-    const validCSSDimension = /^(\d+|\d*\.\d+)(px|rem|em|%|vw|vh|cm|mm|Q|in|pc|pt|ex|ch|lh|vmin|vmax)$/;
-    if (!validCSSDimension.test(width)) {
-      return new Error(
-        `Invalid prop \`${propName}\` of value \`${width}\` supplied to \`${componentName}\`, expected a valid css length with unit (https://developer.mozilla.org/en-US/docs/Web/CSS/length).`
-      );
-    }
-    return null;
-  }
+  width: widthPropType
 };
 
 MenuProvider.defaultProps = {
