@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import widthPropType from '../CustomProps/width';
-import styles from './slide.module.css';
 
 const Slide = ({
   direction,
@@ -12,7 +11,7 @@ const Slide = ({
 }) => {
   const [menuIsOpening, setMenuIsOpening] = useState(false);
 
-  const baseStyles = {
+  const menuContainerStyles = {
     position: 'fixed',
     width,
     zIndex: 9999999999,
@@ -21,7 +20,9 @@ const Slide = ({
     right: direction === 'right' ? 0 : null,
     height: '100vh',
     background: 'whitesmoke',
-    transform: `translateX(${direction === 'right' ? '+' : '-'}100%)`,
+    transform: menuIsOpening
+      ? 'translateX(0)'
+      : `translateX(${direction === 'right' ? '+' : '-'}100%)`,
     transition: 'transform 0.3s ease'
   };
 
@@ -40,11 +41,7 @@ const Slide = ({
   };
 
   return (
-    <div
-      style={baseStyles}
-      className={menuIsOpening ? styles.slideMenuInsideViewport : null}
-      onTransitionEnd={onTansitionEnd}
-    >
+    <div style={menuContainerStyles} onTransitionEnd={onTansitionEnd}>
       {children}
     </div>
   );
