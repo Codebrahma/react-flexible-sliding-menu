@@ -1,9 +1,8 @@
 import React, { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
 import widthPropType from './CustomProps/width';
-import SlidingDiv from './Slide';
-import PushingDiv from './Push';
-import { PushingApp } from './Push/styles';
+import MenuContainerForSlide from './Slide';
+import MenuContainerForPush, { AppContainerForPush } from './Push';
 
 export const MenuContext = createContext();
 
@@ -17,7 +16,7 @@ const MenuProvider = props => {
     animation
   } = props;
   const [isMenuOpen, setIsMenuOpen] = useState(defaultState || false);
-  const [menuIsClosing, setMenuIsClosing] = useState(false);
+  const [menuIsClosing, setMenuIsClosing] = useState(true);
   const [menuProps, _setMenuProps] = useState({});
 
   const openMenu = () => {
@@ -48,24 +47,37 @@ const MenuProvider = props => {
     >
       {animation === 'push' ? (
         <>
-          <PushingDiv show={isMenuOpen} direction={direction} width={width}>
-            <MenuComponent {...menuProps} />
-          </PushingDiv>
-          <PushingApp push={isMenuOpen} direction={direction} width={width}>
-            {children}
-          </PushingApp>
-        </>
-      ) : (
-        <>
           {isMenuOpen && (
-            <SlidingDiv
+            <MenuContainerForPush
               direction={direction}
               width={width}
               menuIsClosing={menuIsClosing}
               setIsMenuOpen={setIsMenuOpen}
             >
               <MenuComponent {...menuProps} />
-            </SlidingDiv>
+            </MenuContainerForPush>
+          )}
+          <AppContainerForPush
+            direction={direction}
+            width={width}
+            setIsMenuOpen={setIsMenuOpen}
+            isMenuOpen={isMenuOpen}
+            menuIsClosing={menuIsClosing}
+          >
+            {children}
+          </AppContainerForPush>
+        </>
+      ) : (
+        <>
+          {isMenuOpen && (
+            <MenuContainerForSlide
+              direction={direction}
+              width={width}
+              menuIsClosing={menuIsClosing}
+              setIsMenuOpen={setIsMenuOpen}
+            >
+              <MenuComponent {...menuProps} />
+            </MenuContainerForSlide>
           )}
           {children}
         </>
