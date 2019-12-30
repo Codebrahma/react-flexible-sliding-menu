@@ -29,7 +29,3 @@ Read the full Documentation [here](https://react-flexible-sliding-menu.netlify.c
 ## Motivation
 
 There are a lot of libraries out there which set out to do the same thing, some accomplished it some don't. But, I always found one or another thing missing in them. Hence, I built this library to fulfill my needs and possibly yours.
-
-## Dependencies
-
-Right now the only main Dependency is [Styled-Components](https://www.styled-components.com/), which I'll soon be replacing with vanilla css to reduce the library size even more.

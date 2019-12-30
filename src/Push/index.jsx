@@ -1,29 +1,71 @@
 import React, { useEffect, useState } from 'react';
-import { PushingDiv } from './styles';
+import PropTypes from 'prop-types';
+import widthPropType from '../CustomProps/width';
 
-const Push = ({ show, children, direction, width }) => {
-  const [shouldRender, setRender] = useState(show);
+const AppContainerForPush = ({ direction, width, menuIsClosing, children }) => {
+  const appContainerStyles = {
+    transform: menuIsClosing
+      ? 'translateX(0)'
+      : `translateX(${direction === 'right' ? '-' : '+'}${width})`,
+    transition: 'transform 0.3s ease'
+  };
+
+  return <div style={appContainerStyles}>{children}</div>;
+};
+
+const Push = ({ direction, width, menuIsClosing, setIsMenuOpen, children }) => {
+  const [menuIsOpening, setMenuIsOpening] = useState(false);
+
+  const menuContainerStyles = {
+    position: 'fixed',
+    width,
+    zIndex: 9999999999,
+    top: 0,
+    left: direction === 'right' ? null : 0,
+    right: direction === 'right' ? 0 : null,
+    height: '100vh',
+    background: 'whitesmoke',
+    transform: menuIsOpening
+      ? 'translateX(0)'
+      : `translateX(${direction === 'right' ? '+' : '-'}100%)`,
+    transition: 'transform 0.3s ease'
+  };
 
   useEffect(() => {
-    if (show) setRender(true);
-  }, [show]);
+    setMenuIsOpening(true);
+  }, []);
 
-  const onAnimationEnd = () => {
-    if (!show) setRender(false);
+  useEffect(() => {
+    if (menuIsClosing) setMenuIsOpening(false);
+  }, [menuIsClosing]);
+
+  const onTransitionEnd = () => {
+    if (menuIsClosing) {
+      setIsMenuOpen(false);
+    }
   };
 
   return (
-    shouldRender && (
-      <PushingDiv
-        show={show}
-        width={width}
-        direction={direction}
-        onAnimationEnd={onAnimationEnd}
-      >
-        {children}
-      </PushingDiv>
-    )
+    <div style={menuContainerStyles} onTransitionEnd={onTransitionEnd}>
+      {children}
+    </div>
   );
 };
 
+Push.propTypes = {
+  direction: PropTypes.oneOf(['left', 'right']).isRequired,
+  width: widthPropType.isRequired,
+  menuIsClosing: PropTypes.bool.isRequired,
+  setIsMenuOpen: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired
+};
+
+AppContainerForPush.propTypes = {
+  direction: PropTypes.oneOf(['left', 'right']).isRequired,
+  width: widthPropType.isRequired,
+  menuIsClosing: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired
+};
+
+export { AppContainerForPush };
 export default Push;

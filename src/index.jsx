@@ -1,33 +1,39 @@
 import React, { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
-import SlidingDiv from './Slide';
-import PushingDiv from './Push';
-import { PushingApp } from './Push/styles';
+import widthPropType from './CustomProps/width';
+import MenuContainerForSlide from './Slide';
+import MenuContainerForPush, { AppContainerForPush } from './Push';
 
 export const MenuContext = createContext();
 
 const MenuProvider = props => {
   const {
-    defaultState,
+    openByDefault,
     MenuComponent,
     children,
     width,
     direction,
     animation
   } = props;
-  const [isMenuOpen, setIsMenuOpen] = useState(defaultState || false);
+  const [isMenuOpen, setIsMenuOpen] = useState(openByDefault || false);
+  const [menuIsClosing, setMenuIsClosing] = useState(true);
   const [menuProps, _setMenuProps] = useState({});
 
   const openMenu = () => {
     setIsMenuOpen(true);
+    setMenuIsClosing(false);
   };
 
   const closeMenu = () => {
-    setIsMenuOpen(false);
+    setMenuIsClosing(true);
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if (isMenuOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   };
 
   const setMenuProps = newMenuProps => {
@@ -41,18 +47,38 @@ const MenuProvider = props => {
     >
       {animation === 'push' ? (
         <>
-          <PushingDiv show={isMenuOpen} direction={direction} width={width}>
-            <MenuComponent {...menuProps} />
-          </PushingDiv>
-          <PushingApp push={isMenuOpen} direction={direction} width={width}>
+          {isMenuOpen && (
+            <MenuContainerForPush
+              direction={direction}
+              width={width}
+              menuIsClosing={menuIsClosing}
+              setIsMenuOpen={setIsMenuOpen}
+            >
+              <MenuComponent {...menuProps} />
+            </MenuContainerForPush>
+          )}
+          <AppContainerForPush
+            direction={direction}
+            width={width}
+            setIsMenuOpen={setIsMenuOpen}
+            isMenuOpen={isMenuOpen}
+            menuIsClosing={menuIsClosing}
+          >
             {children}
-          </PushingApp>
+          </AppContainerForPush>
         </>
       ) : (
         <>
-          <SlidingDiv show={isMenuOpen} direction={direction} width={width}>
-            <MenuComponent {...menuProps} />
-          </SlidingDiv>
+          {isMenuOpen && (
+            <MenuContainerForSlide
+              direction={direction}
+              width={width}
+              menuIsClosing={menuIsClosing}
+              setIsMenuOpen={setIsMenuOpen}
+            >
+              <MenuComponent {...menuProps} />
+            </MenuContainerForSlide>
+          )}
           {children}
         </>
       )}
@@ -64,26 +90,17 @@ MenuProvider.propTypes = {
   /**
    * Set's the initial state of the Menu i.e. Open or Close
    */
-  defaultState: PropTypes.bool,
+  openByDefault: PropTypes.bool,
   takeChildrenHeight: PropTypes.bool,
   direction: PropTypes.oneOf(['left', 'right']),
   animation: PropTypes.oneOf(['slide', 'push']),
   MenuComponent: PropTypes.elementType.isRequired,
   children: PropTypes.node.isRequired,
-  width: (props, propName, componentName) => {
-    const { width } = props;
-    const validCSSDimension = /^(\d+|\d*\.\d+)(px|rem|em|%|vw|vh|cm|mm|Q|in|pc|pt|ex|ch|lh|vmin|vmax)$/;
-    if (!validCSSDimension.test(width)) {
-      return new Error(
-        `Invalid prop \`${propName}\` of value \`${width}\` supplied to \`${componentName}\`, expected a valid css length with unit (https://developer.mozilla.org/en-US/docs/Web/CSS/length).`
-      );
-    }
-    return null;
-  }
+  width: widthPropType
 };
 
 MenuProvider.defaultProps = {
-  defaultState: false,
+  openByDefault: false,
   takeChildrenHeight: false,
   width: '250px',
   direction: 'left',
