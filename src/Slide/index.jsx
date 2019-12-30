@@ -34,14 +34,14 @@ const Slide = ({
     if (menuIsClosing) setMenuIsOpening(false);
   }, [menuIsClosing]);
 
-  const onTansitionEnd = () => {
+  const onTransitionEnd = () => {
     if (menuIsClosing) {
       setIsMenuOpen(false);
     }
   };
 
   return (
-    <div style={menuContainerStyles} onTransitionEnd={onTansitionEnd}>
+    <div style={menuContainerStyles} onTransitionEnd={onTransitionEnd}>
       {children}
     </div>
   );
