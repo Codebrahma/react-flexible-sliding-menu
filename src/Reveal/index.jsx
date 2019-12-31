@@ -6,7 +6,6 @@ const MenuContainerForReveal = ({ direction, width, children }) => {
   const menuContainerStyles = {
     position: 'fixed',
     width,
-    zIndex: 888,
     top: 0,
     left: direction === 'right' ? null : 0,
     right: direction === 'right' ? 0 : null,
@@ -25,8 +24,6 @@ const AppContainerForReveal = ({
   children
 }) => {
   const appContainerStyles = {
-    position: 'relative',
-    zIndex: 999,
     transform: menuIsClosing
       ? 'translateX(0)'
       : `translateX(${direction === 'right' ? '-' : '+'}${width})`,
