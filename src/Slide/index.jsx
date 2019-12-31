@@ -23,7 +23,7 @@ const Slide = ({
     transform: menuIsOpening
       ? 'translateX(0)'
       : `translateX(${direction === 'right' ? '+' : '-'}100%)`,
-    transition: 'transform 0.3s ease'
+    transition: 'transform 0.5s ease'
   };
 
   useEffect(() => {

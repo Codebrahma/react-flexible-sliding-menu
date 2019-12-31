@@ -27,7 +27,7 @@ const AppContainerForReveal = ({
     transform: menuIsClosing
       ? 'translateX(0)'
       : `translateX(${direction === 'right' ? '-' : '+'}${width})`,
-    transition: 'transform 0.3s ease'
+    transition: 'transform 0.5s ease'
   };
 
   const onTransitionEnd = () => {

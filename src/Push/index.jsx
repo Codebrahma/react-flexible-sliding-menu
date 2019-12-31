@@ -7,7 +7,7 @@ const AppContainerForPush = ({ direction, width, menuIsClosing, children }) => {
     transform: menuIsClosing
       ? 'translateX(0)'
       : `translateX(${direction === 'right' ? '-' : '+'}${width})`,
-    transition: 'transform 0.3s ease'
+    transition: 'transform 0.5s ease'
   };
 
   return <div style={appContainerStyles}>{children}</div>;
@@ -28,7 +28,7 @@ const Push = ({ direction, width, menuIsClosing, setIsMenuOpen, children }) => {
     transform: menuIsOpening
       ? 'translateX(0)'
       : `translateX(${direction === 'right' ? '+' : '-'}100%)`,
-    transition: 'transform 0.3s ease'
+    transition: 'transform 0.5s ease'
   };
 
   useEffect(() => {
