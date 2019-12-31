@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import widthPropType from './CustomProps/width';
 import MenuContainerForSlide from './Slide';
 import MenuContainerForPush, { AppContainerForPush } from './Push';
+import { MenuContainerForReveal, AppContainerForReveal } from './Reveal';
 
 export const MenuContext = createContext();
 
@@ -59,12 +60,32 @@ const MenuProvider = props => {
             <AppContainerForPush
               direction={direction}
               width={width}
-              setIsMenuOpen={setIsMenuOpen}
-              isMenuOpen={isMenuOpen}
               menuIsClosing={menuIsClosing}
             >
               {children}
             </AppContainerForPush>
+          </>
+        );
+      case 'reveal':
+        return (
+          <>
+            {isMenuOpen && (
+              <MenuContainerForReveal
+                direction={direction}
+                width={width}
+                menuIsClosing={menuIsClosing}
+              >
+                <MenuComponent {...menuProps} />
+              </MenuContainerForReveal>
+            )}
+            <AppContainerForReveal
+              direction={direction}
+              width={width}
+              menuIsClosing={menuIsClosing}
+              setIsMenuOpen={setIsMenuOpen}
+            >
+              {children}
+            </AppContainerForReveal>
           </>
         );
       default:
@@ -101,7 +122,7 @@ MenuProvider.propTypes = {
    */
   openByDefault: PropTypes.bool,
   direction: PropTypes.oneOf(['left', 'right']),
-  animation: PropTypes.oneOf(['slide', 'push']),
+  animation: PropTypes.oneOf(['slide', 'push', 'reveal']),
   MenuComponent: PropTypes.elementType.isRequired,
   children: PropTypes.node.isRequired,
   width: widthPropType
