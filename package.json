@@ -1,6 +1,6 @@
 {
   "name": "react-flexible-sliding-menu",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A React library which provides Flexible Sliding Menu with an easy to use API and a bunch of other awesome features. Also, you get to choose which animation you want for the sliding menu.",
   "main": "dist/index.js",
   "homepage": "https://react-flexible-sliding-menu.netlify.com/",
