@@ -30,9 +30,13 @@ const Slide = ({
     setMenuIsOpening(true);
   }, []);
 
-  useEffect(() => {
-    if (menuIsClosing) setMenuIsOpening(false);
-  }, [menuIsClosing]);
+  useEffect(
+    e => {
+      if (menuIsClosing && e.currentTarget === e.target)
+        setMenuIsOpening(false);
+    },
+    [menuIsClosing]
+  );
 
   const onTransitionEnd = () => {
     if (menuIsClosing) {

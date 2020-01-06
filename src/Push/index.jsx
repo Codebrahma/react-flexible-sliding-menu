@@ -39,8 +39,8 @@ const Push = ({ direction, width, menuIsClosing, setIsMenuOpen, children }) => {
     if (menuIsClosing) setMenuIsOpening(false);
   }, [menuIsClosing]);
 
-  const onTransitionEnd = () => {
-    if (menuIsClosing) {
+  const onTransitionEnd = e => {
+    if (menuIsClosing && e.currentTarget === e.target) {
       setIsMenuOpen(false);
     }
   };

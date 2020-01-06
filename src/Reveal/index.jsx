@@ -33,7 +33,6 @@ const AppContainerForReveal = ({
 
   const onTransitionEnd = e => {
     if (menuIsClosing && e.currentTarget === e.target) {
-      alert('Menu Closing Transition Ended');
       setIsMenuOpen(false);
     }
   };
