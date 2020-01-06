@@ -11,6 +11,7 @@ const MenuContainerForReveal = ({ direction, width, children }) => {
     right: direction === 'right' ? 0 : null,
     height: '100vh',
     background: 'whitesmoke'
+    // display: isMenuOpen ? 'block' : 'none'
   };
 
   return <div style={menuContainerStyles}>{children}</div>;
@@ -55,6 +56,7 @@ MenuContainerForReveal.propTypes = {
   direction: PropTypes.oneOf(['left', 'right']).isRequired,
   width: widthPropType.isRequired,
   children: PropTypes.node.isRequired
+  // isMenuOpen: PropTypes.bool.isRequired
 };
 
 export { AppContainerForReveal, MenuContainerForReveal };

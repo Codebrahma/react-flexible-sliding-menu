@@ -74,6 +74,7 @@ const MenuProvider = props => {
                 direction={direction}
                 width={width}
                 menuIsClosing={menuIsClosing}
+                // isMenuOpen={isMenuOpen}
               >
                 <MenuComponent {...menuProps} />
               </MenuContainerForReveal>
