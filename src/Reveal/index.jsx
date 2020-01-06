@@ -31,10 +31,9 @@ const AppContainerForReveal = ({
     transition: 'transform 0.5s ease'
   };
 
-  const onTransitionEnd = event => {
-    event.stopPropagation();
-    alert('Transistion Ended');
-    if (menuIsClosing) {
+  const onTransitionEnd = e => {
+    if (menuIsClosing && e.currentTarget === e.target) {
+      alert('Menu Closing Transition Ended');
       setIsMenuOpen(false);
     }
   };
