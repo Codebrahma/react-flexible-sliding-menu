@@ -24,11 +24,18 @@ npm install
 Testing App should be present outside `react-flexible-sliding-menu`, we suggest create `testing-app` as a sibling folder.
 ```
 npx create-react-app testing-app
+
 ```
 If you followed the steps correctly your folder structure should look like this:
 ```
 react-flexible-sliding-menu/
 testing-app/
+```
+
+Now we need to link `react-flexible-sliding-menu` and the `testing-app`:
+```
+cd testing-app
+npm link ../react-flexible-sliding-menu
 ```
 
 ### Linking `react` and `react-dom` to `testing-app`:
